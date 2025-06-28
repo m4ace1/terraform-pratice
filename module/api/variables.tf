@@ -1,3 +1,4 @@
-variable "" {
+variable "api_registration" {
   
 }
+
