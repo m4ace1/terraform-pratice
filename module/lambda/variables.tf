@@ -1,3 +1,3 @@
-variable "" {
+variable "CREATE_USER_ROLE_ARN" {
   
 }
