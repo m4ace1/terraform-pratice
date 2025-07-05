@@ -1,5 +1,14 @@
+locals {
+  RESOURCES_PREFIX = "blood_transfusion"
+AWS_REGION = data.aws_region.current.name
+AWS_CCOUNT_ID = data.aws_caller_identity.current.account_id
+}
+
 module "api" {
   source = "./module/api"
+  api_registration = "myapi"
+  create_user_function_arn = module.lambda.create_user_function_arn
+  
 }
 
 module "cognito" {
@@ -28,8 +37,13 @@ module "upscale_table" {
 
 module "policy" {
   source = "./module/policy"
+  identity_pool_id = module.cognito.identity_pool_id
+  CREATE_USER_ROLE_NAME = module.role.CREATE_USER_ROLE_NAME
+  region = local.AWS_REGION
+  account_id = local.AWS_CCOUNT_ID
 }
 module "role" {
   source = "./module/role"
+  RESOURCES_PREFIX = local.RESOURCES_PREFIX
 }
 

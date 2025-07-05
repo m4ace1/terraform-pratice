@@ -22,7 +22,7 @@ resource "aws_api_gateway_rest_api" "Gatewayproject" {
             httpMethod           = "POST"
             payloadFormatVersion = "1.0"
             type                 = "HTTP_PROXY"
-            uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+            uri                  = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${create_user_function_arn}/invocations"
           }
         }
       }, 
